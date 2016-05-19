@@ -1,3 +1,3 @@
-# openag-gc0012
+# openag_gc0012
 carbon dioxide sensor
 .
