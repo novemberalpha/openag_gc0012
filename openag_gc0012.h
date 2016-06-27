@@ -6,38 +6,33 @@
 #define OPENAG_GC0012_h
 
 #include "Arduino.h"
-#include <openag_peripheral.h>
+#include <std_msgs/Float32.h>
 
 /**
  * \brief Carbon dioxide sensor
  */
-class Gc0012 : public Peripheral {
+class Gc0012 {
   public:
+    // Constructor
+    Gc0012(int serial_port);
+
     // Public variables
-    String id;
-    float carbon_dioxide;
+    bool has_error;
+    char* error_msg;
 
     // Public functions
-    Gc0012(String id, String* parameters); // constructor
-    ~Gc0012(); // destructor
     void begin();
-    String get(String key);
-    String set(String key, String value);
+    bool get_air_carbon_dioxide(std_msgs::Float32 &msg);
 
   private:
     // Private variables
-    String _carbon_dioxide_message;
+    float _carbon_dioxide;
     uint32_t _time_of_last_reading;
-    const static uint32_t _min_update_interval = 0;
-    String _carbon_dioxide_key;
-    int _serial_port;
-    HardwareSerial *_port;
+    const static uint32_t _min_update_interval = 2000;
+    HardwareSerial *_serial_port;
 
     // Private functions
-    void getData();
-    String getCarbonDioxide();
-    String getMessage(String key, String value);
-    String getErrorMessage(String key);
+    bool readData();
 };
 
 #endif
