@@ -43,7 +43,6 @@ bool Gc0012::readData() {
   // Read sensor
   _serial_port->print("Z\r\n");
   String data_string = _serial_port->readStringUntil(0x0A);
-  Serial.println(data_string);
 
   // Check for failure
   if (data_string[1] != 'Z') {
