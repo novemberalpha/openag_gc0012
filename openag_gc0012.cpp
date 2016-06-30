@@ -5,6 +5,9 @@
 #include "openag_gc0012.h"
 
 Gc0012::Gc0012(int serial_port) {
+  has_error = false;
+  _send_carbon_dioxide = false;
+  _time_of_last_reading = 0;
   // Select serial port
   switch(serial_port) {
     case 1:
@@ -20,8 +23,6 @@ Gc0012::Gc0012(int serial_port) {
 }
 
 void Gc0012::begin() {
-  _time_of_last_reading = 0;
-
   // Enable serial port
   _serial_port->begin(9600);
 
