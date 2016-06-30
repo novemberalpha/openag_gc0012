@@ -22,17 +22,19 @@ class Gc0012 {
 
     // Public functions
     void begin();
+    void update();
     bool get_air_carbon_dioxide(std_msgs::Float32 &msg);
 
   private:
     // Private variables
     float _carbon_dioxide;
+    bool _send_carbon_dioxide;
     uint32_t _time_of_last_reading;
     const static uint32_t _min_update_interval = 2000;
     HardwareSerial *_serial_port;
 
     // Private functions
-    bool readData();
+    void readData();
 };
 
 #endif

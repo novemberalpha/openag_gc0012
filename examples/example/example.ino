@@ -9,6 +9,8 @@ void setup() {
 std_msgs::Float32 msg;
 
 void loop() {
+  gc0012_1.update();
+
   if (gc0012_1.get_air_carbon_dioxide(msg)) {
     Serial.print("Air CO2: ");
     Serial.println(msg.data);

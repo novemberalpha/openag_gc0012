@@ -30,16 +30,20 @@ void Gc0012::begin() {
 }
 
 bool Gc0012::get_air_carbon_dioxide(std_msgs::Float32 &msg) {
-  if (millis() - _time_of_last_reading > _min_update_interval){
-    _time_of_last_reading = millis();
-    bool res = readData();
-    msg.data = _carbon_dioxide;
-    return res;
-  }
-  return false;
+  msg.data = _carbon_dioxide;
+  bool res = _send_carbon_dioxide;
+  _send_carbon_dioxide = false;
+  return res;
 }
 
-bool Gc0012::readData() {
+void Gc0012::update() {
+  if (millis() - _time_of_last_reading > _min_update_interval){
+    readData();
+    _time_of_last_reading = millis();
+  }
+}
+
+void Gc0012::readData() {
   // Read sensor
   _serial_port->print("Z\r\n");
   String data_string = _serial_port->readStringUntil(0x0A);
@@ -52,7 +56,6 @@ bool Gc0012::readData() {
   else { // good reading
     _carbon_dioxide = (float)(data_string.substring(3,8).toInt());
     _carbon_dioxide = round(_carbon_dioxide / 10) * 10;
+    _send_carbon_dioxide = true;
   }
-
-  return !has_error;
 }
