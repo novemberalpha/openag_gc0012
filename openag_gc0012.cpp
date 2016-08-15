@@ -5,7 +5,8 @@
 #include "openag_gc0012.h"
 
 Gc0012::Gc0012(int serial_port) {
-  has_error = false;
+  status_level = OK;
+  status_msg = "";
   _send_carbon_dioxide = false;
   _time_of_last_reading = 0;
   // Select serial port
@@ -51,10 +52,12 @@ void Gc0012::readData() {
 
   // Check for failure
   if (data_string[1] != 'Z') {
-      has_error = true;
-      error_msg = "Failed to read";
+    status_level = ERROR;
+    status_msg = "Failed to read from sensor";
   }
   else { // good reading
+    status_level = OK;
+    status_msg = "";
     _carbon_dioxide = (float)(data_string.substring(3,8).toInt());
     _carbon_dioxide = round(_carbon_dioxide / 10) * 10;
     _send_carbon_dioxide = true;

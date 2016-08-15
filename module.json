@@ -1,0 +1,16 @@
+{
+    "header_file": "openag_gc0012.h",
+    "class_name": "Gc0012",
+    "arguments": [
+        {
+            "name": "serial_port",
+            "type": "int",
+            "default": 1
+        }
+    ],
+    "outputs": {
+        "air_carbon_dioxide": {
+            "type": "std_msgs/Float32"
+        }
+    }
+}

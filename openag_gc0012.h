@@ -6,19 +6,15 @@
 #define OPENAG_GC0012_h
 
 #include "Arduino.h"
+#include <openag_module.h>
 #include <std_msgs/Float32.h>
 
 /**
  * \brief Carbon dioxide sensor
  */
-class Gc0012 {
+class Gc0012 : public Module {
   public:
-    // Constructor
     Gc0012(int serial_port);
-
-    // Public variables
-    bool has_error;
-    char* error_msg;
 
     // Public functions
     void begin();
