@@ -53,7 +53,7 @@ void Gc0012::readData() {
   // Check for failure
   if (data_string[1] != 'Z') {
     status_level = ERROR;
-    status_msg = "Failed to read from sensor";
+    status_msg = "31";
   }
   else { // good reading
     status_level = OK;
