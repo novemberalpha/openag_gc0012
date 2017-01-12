@@ -6,6 +6,7 @@
 
 Gc0012::Gc0012(int serial_port) {
   status_level = OK;
+  status_code = CODE_OK;
   status_msg = "";
   _send_carbon_dioxide = false;
   _time_of_last_reading = 0;
@@ -53,10 +54,12 @@ void Gc0012::readData() {
   // Check for failure
   if (data_string[1] != 'Z') {
     status_level = ERROR;
+    status_code=  CODE_FAILED_TO_READ;
     status_msg = "Failed to read from sensor";
   }
   else { // good reading
     status_level = OK;
+    status_code = CODE_OK;
     status_msg = "";
     _carbon_dioxide = (float)(data_string.substring(3,8).toInt());
     _carbon_dioxide = round(_carbon_dioxide / 10) * 10;

@@ -31,6 +31,9 @@ class Gc0012 : public Module {
 
     // Private functions
     void readData();
+
+    // Status codes
+    static const uint8_t CODE_FAILED_TO_READ = 2;
 };
 
 #endif
