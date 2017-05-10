@@ -62,7 +62,7 @@ void Gc0012::readData() {
     status_code = CODE_OK;
     status_msg = "";
     _carbon_dioxide = (float)(data_string.substring(3,8).toInt());
-    _carbon_dioxide = round(_carbon_dioxide / 10) * 10;
+    // _carbon_dioxide = round(_carbon_dioxide / 10) * 10;
     _send_carbon_dioxide = true;
   }
 }
