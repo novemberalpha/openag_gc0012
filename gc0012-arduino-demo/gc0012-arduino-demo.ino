@@ -53,7 +53,7 @@ void loop()
   }
   else { //  good reading
     co2 = (float)(data_string.substring(3,8).toInt());
-//    co2 = round(co2 / 10) * 10; // why are we rounding down?
+    co2 = round(co2 / 10) * 10;
     Serial.println(co2);
   }
 }
